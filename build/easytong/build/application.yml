@@ -1,0 +1,32 @@
+﻿server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${PUB_IP}:3306/simulate_et?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://${PUB_IP}:3306/iot_platform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 310012
+    type: com.zaxxer.hikari.HikariDataSource
+
+  logging:
+    config: log4j2-spring.xml
+    level:
+      com.zyzh.simulate: trace
+## 商汤代理
+senselinkAppProxy:
+  url:  http://192.168.5.144:7073
+
+## 模拟设备
+SimulateApi:
+  url: http://${PUB_IP}:5002/sdk
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.zyzh.simulate
+  call-setters-on-nulls: true
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

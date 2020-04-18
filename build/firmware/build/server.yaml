@@ -1,0 +1,48 @@
+﻿#是否产品模式，影响：log的输出级别和内容
+production: true
+#http服务端口
+port: 5001
+#日志的输出路径
+logpath: ${DOCKER_DATA_PATH}/easyconnect-firmware.log
+#flowchart地址
+flowcharthost: ${PUB_IP}:9011
+#流程同步时间 单位：秒
+flowsynctime: 60
+#Mongo数据库配置
+mongo:
+  url: mongodb://mongoadmin:mongoadmin@${PUB_IP}:27017/admin
+  # database: easyconnect_tp
+  database: easyconnect
+#MySQL数据库配置
+mysql:
+  # url: root:310012@tcp(172.16.4.6:3306)/iot_platform_tp?charset=utf8mb4
+  url: root:310012@tcp(${PUB_IP}:3306)/iot_firmware?charset=utf8mb4
+#MQTT配置
+mqtt:
+  url: tcp://${PUB_IP}:1883
+  username: admin
+  password: admin
+#Redis配置
+redis:
+  url: ${PUB_IP}:6379
+  password: hzsun@310012
+  poolsize: 100
+  retries: 99
+  # syncdb包括流程服务和权限
+  # syncdb: 10
+  syncdb: 5
+  # mqttauthdb: 11
+  mqttauthdb: 3
+#Influx配置
+influx:
+  addr: http://${PUB_IP}:8086
+  username: admin
+  password: admin
+  # database: easyconnect_tp
+  database: easyconnect
+#基础服务接口
+api:
+  topic: http://${PUB_IP}:8099/base/topic/getTopic
+  code: http://${PUB_IP}:8099/base/code/getCode
+  file: http://${PUB_IP}:10036/upload
+  service: http://http://${PUB_IP}:9011/thing/connector/mqtt/service

@@ -1,0 +1,65 @@
+﻿spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${PUB_IP}:3306/iot_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: 310012
+  mvc:
+    dispatch-options-request: true
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+  data:
+    mongodb:
+      host: ${PUB_IP}
+      port: 27017
+      authentication-database: admin
+      username: mongoadmin
+      password: mongoadmin
+      database: easyconnect
+
+redis:
+  database: 0
+  host: ${PUB_IP}
+  port: 6379
+  password: hzsun@310012
+  timeout: 3000
+  testOnBorrow: true
+  pool:
+    max-idle: 100
+    min-idle: 1
+    max-active: 1000
+    max-wait: -1
+    timeout: 3000
+
+mybatis:
+  mapper-locations: /mapper/*.xml
+
+server:
+  port: 12321
+  tomcat:
+    uri-encoding: UTF-8
+  connection-timeout: 20000
+  max-http-header-size: 102400
+
+# 日志存放位置
+logging:
+  level:
+    com.zyzh.bigdata.model: debug
+  file: ${DOCKER_DATA_PATH}/authorization.log
+# 默认密码
+default:
+  password: 123456
+# 是否开启验证码
+verifycode: true
+# 登录失败锁定时间(秒)
+lockTime: 600
+
+# 使用统一身份认证
+casValidate:
+  enable: false
+  url: http://${PUB_IP}:8030/cas/serviceValidate
+# 使用RestfulAPI的请求方式
+restful: false

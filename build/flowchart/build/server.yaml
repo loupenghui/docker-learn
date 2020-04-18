@@ -1,0 +1,111 @@
+﻿# 是否产品模式，影响：log的输出级别和内容
+production: true
+# http服务IP（请勿使用127.0.0.1或0.0.0.0）
+ip: ${PUB_IP}
+# http服务端口
+port: 9011
+# http服务用户名
+user: admin
+# http服务密码
+password: password@310012
+# 是否开启鉴权
+auth: true
+# 是否校验签名
+sign: true
+# mqtt设置，如果开启 connector->enable，此选项才能起作用
+mqtt:
+  # brokder地址以及端口
+  url: tcp://${PUB_IP}:1883
+  # 用户名
+  user: admin
+  # 密码
+  password: admin
+  # rrpc类别的topic，publish后等待的最大超时时间（毫秒）
+  rrpcTimeout: 2000
+  # Ping超时时间（秒）
+  pingTimeout: 10
+  # 连接超时时间（秒）
+  connectTimeout: 30
+# redis设置
+redis:
+  # redis服务器地址
+  url: ${PUB_IP}:6379
+  # redis密码
+  password: hzsun@31012
+  # redis库
+  db: 10
+  # 最大重试次数
+  maxRetries:   99
+  # 连接池最大连接数
+  poolSize:     100
+  # 连接池最小连接数
+  minIdleConns: 10
+# kafka设置
+kafka:
+  # 连接方式
+  network: tcp
+  # 地址及端口
+  address: ${PUB_IP}:9092
+  # 日志主题
+  topic: flowchart_log
+  # 分区
+  partition: 0
+# mysql设置
+mysql:
+  # 连接地址
+  url: root:310012@tcp(${PUB_IP}:3306)/iot_platform
+# mongo设置
+mongo:
+  # 连接地址
+  url: mongodb://mongoadmin:mongoadmin@${PUB_IP}:27017/admin
+  # 数据库
+  database: easyconnect
+# 日志的输出路径
+logPath: ${DOCKER_DATA_PATH}/flowchart.log
+# 连接器设置，可以全部为开，但必须至少一个开启，否则程序没有执行价值
+connector:
+  # mqtt连接器是否开启
+  mqtt:
+    enable: true
+    # 共享订阅的组名
+    groupName: flowchart
+  # http连接器是否开启
+  http:
+    enable: true
+  # websocket连接器是否开启
+  websocket:
+    enable: true
+    # 超时时间，在超过heart值的时间没有客户端心跳，就关闭连接,单位：毫秒
+    idleTimeout: 10000
+    # 包的最大大小，单位：字节
+    maxPacket: 1024
+    # 握手超时时间,单位：毫秒
+    handShakeTimeout: 5000
+    # 服务端向设备请求，超时时间，超过此时间，将会直接返回失败,单位：毫秒
+    requestTimeout: 1000
+# 客户端发送包的最大限制，单位：字节，所有连接器都支持此限制
+maxPacket: 1024
+# 断路器的设置，断路器会对系统健壮性有优势，但是同样需要性能上付出代价
+breaker:
+  # 是否启用断路器
+  enable: false
+  # 断路器转换方式 ==count的时候起作用,断路器从关闭到开启的阀值，当失败次数>=阀值，断路器开启
+  threshold: 10
+  # 断路器从开启->半开状态的阀值
+  timeout: 60
+  # 断路器转换方式，有count 和 rate 两种方式
+  trip: count
+  # 断路器转换方式 ==rate的时候起作用，失败比率的采样值，例如 count=10,rate=0.4，表示失败次数>=4次或者10次中失败次数>=4，会触发断路
+  count: 0
+  # 断路器转换方式 ==rate的时候起作用，失败比率
+  rate: 0
+  # 断路器池的超时时间，在超过此时间后，会释放不活跃的断路器
+  poolTimeout: 60
+# 接口地址
+api:
+  # 文件服务器上传接口地址
+  file: http://${PUB_IP}:10036/upload
+  # 设备注册接口
+  registration: http://${PUB_IP}:8080/device/register/function
+# 连接池同步时间（秒）
+poolSyncTime: 60

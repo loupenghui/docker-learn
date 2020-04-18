@@ -1,0 +1,29 @@
+[
+    {
+        "Id": "",
+        "EventName": "设备连接",
+        "Identifier": "connect",
+        "EventType": "",
+        "OutPutData": [ ],
+        "EventArgs": { },
+        "EventCustom": false
+    },
+    {
+        "Id": "",
+        "EventName": "设备离线",
+        "Identifier": "disconnect",
+        "EventType": "",
+        "OutPutData": [ ],
+        "EventArgs": { },
+        "EventCustom": false
+    },
+    {
+        "Id": "",
+        "EventName": "设备心跳",
+        "Identifier": "heart",
+        "EventType": "",
+        "OutPutData": [ ],
+        "EventArgs": { },
+        "EventCustom": false
+    }
+]

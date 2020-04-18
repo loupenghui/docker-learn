@@ -1,0 +1,33 @@
+server:
+  port: 8099
+  max-http-header-size: 102400
+
+spring:
+  application:
+    name: BaseDefinition
+  datasource:
+    name: mariadb
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${PUB_IP}:3306/iot_platform?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+    username: root
+    password: 310012
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 180000
+      maximum-pool-size: 60
+      minimum-idle: 10
+  project-name: base
+#  cloud:
+#    consul:
+#      host: 192.168.1.160
+#      port: 8500
+#      discovery:
+#        register: true
+#        tags: urlprefix-/BaseDefinition strip=/BaseDefinition
+#        prefix:  /BaseDefinition
+#        hostname: 192.168.1.159
+
+mybatis:
+  mapper-locations: /mapper/*.xml

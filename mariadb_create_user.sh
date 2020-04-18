@@ -1,0 +1,10 @@
+#!/bin/bash
+mysql -uroot -p310012 -e"CREATE DATABASE iot_platform DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
+mysql -uroot -p310012 -e"CREATE DATABASE iot DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
+mysql -uroot -p310012 -e"CREATE USER 'iot'@'%' IDENTIFIED BY 'iot@310012';"
+mysql -uroot -p310012 -e"grant all privileges on *.* to 'iot'@'%';"
+mysql -uroot -p310012 -e"use iot_platform;source /docker-entrypoint-initdb.d/iotplatform.sql;"
+mysql -uroot -p310012 -e"use iot_platform;source /docker-entrypoint-initdb.d/sdk.sql;"
+mysql -uroot -p310012 -e"use iot;source /docker-entrypoint-initdb.d/iot.sql;"
+mysql -uroot -p310012 -e"source /docker-entrypoint-initdb.d/simulate_et.sql;"
+mysql -uroot -p310012 -e"source /docker-entrypoint-initdb.d/iot_firmware.sql;"

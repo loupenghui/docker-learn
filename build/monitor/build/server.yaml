@@ -1,0 +1,40 @@
+﻿# http服务IP（请勿使用127.0.0.1或0.0.0.0）
+ip: ${PUB_IP}
+# http服务端口
+port: 5003
+# 是否产品模式，影响：log的输出级别和内容,开发时用false,正式运行时需改为true
+production: false
+# 日志的输出路径
+logPath: ${DOCKER_DATA_PATH}/easyconnect-monitor.log
+
+# kafka设置
+kafka:
+  # 连接方式
+  network: tcp
+  # 地址及端口
+  address: [${PUB_IP}:9092]
+  # 日志主题
+  topic: easyconnect_monitor
+  # 分区
+  partition: 0
+# mongo设置
+mongo:
+  # 连接地址
+  url: mongodb://mongoadmin:mongoadmin@${PUB_IP}:27017/admin
+  # 数据库
+  database: easyconnect
+
+# 安全运维平台的redis地址
+redis:
+  url: ${PUB_IP}:6379
+  password: hzsun@310012
+  poolsize: 100
+  retries: 99
+  dbindex: 1
+# 安全运维平台的nsq
+nsq:
+  url: ${NSP_ADDRESS}
+# 同步设备信息的时间间隔/s
+interval: 180
+# 检查设备类型的时间间隔/s
+productinterval: 3600

@@ -1,0 +1,31 @@
+﻿#是否产品模式，影响：log的输出级别和内容
+production: true
+#http服务端口
+port: 5002
+#日志的输出路径
+logpath: ${DOCKER_DATA_PATH}/easyconnect-sdk.log
+#flowchart地址
+flowcharthost: ${PUB_IP}:9011
+#流程同步时间 单位：秒
+flowsynctime: 60
+#MySQL数据库配置
+mysql:
+  url: root:310012@tcp(${PUB_IP}:3306)/iot_platform?charset=utf8mb4
+#MQTT配置
+mqtt:
+  url: tcp://${PUB_IP}:1883
+  username: admin
+  password: admin
+#基础服务接口
+api:
+  productlist: http://${PUB_IP}:5000/easyconnect/product_select
+  devicelist: http://${PUB_IP}:5000/easyconnect/device_select/:productKey
+  deviceinfo: http://${PUB_IP}:5000/easyconnect/device_config/:productKey/:deviceName
+  deviceadd: http://${PUB_IP}:5000/easyconnect/device
+  deviceaddbatch: http://${PUB_IP}:5000/easyconnect/device_batch
+  devicedelete: http://${PUB_IP}:5000/easyconnect/device/:productKey/:deviceName
+  devicedeletebatch: http://${PUB_IP}:5000/easyconnect/device_batch
+# 随机断开、连接设备的时间间隔/s
+random:
+  connect: 360
+  disconnect: 360
